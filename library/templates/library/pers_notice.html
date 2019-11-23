@@ -1,0 +1,89 @@
+{% extends "library/pers_base.html" %}
+{% load static %}
+    {%block perscontent%}
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+    
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{%url 'notice'%}"></a>
+          </li>
+          <li class="breadcrumb-item active">消息通知</li>
+        </ol>
+
+        <!-- Icon Cards-->
+       
+        <!-- Area Chart Example-->
+        <!--<div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-chart-area"></i>
+            阅读趋势图</div>
+          <div class="card-body">
+            <canvas id="myAreaChart" width="100%" height="30"></canvas>
+          </div>
+          <div class="card-footer small text-muted">数据截至昨日 11:59 PM</div>
+        </div>-->
+
+        <!-- DataTables Example -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i></i>
+                {{notice_week.columnName}}</div>
+            <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="newnotice" width="100%" cellspacing="0">
+                            {% for notice in notice_week %}
+                            <tr class="{% cycle notice.tittle notice.pubDate %}">
+                                 <td><i class="fas fa-bell fa-fw"></i><a href="/shownotice/detail?aticleID={{ notice.articleID }}">{{notice.articleID}} {{notice.tittle}}</a><p class="small text-muted" align="right">{{notice.pubDate}}</p></td>
+                            </tr>
+                            {% endfor %}
+
+                            <tr>
+
+                            </tr>
+                            <!--<tr>
+                                <td><i class="fas fa-bell fa-fw"></i><a href="notice.notice_id">通知标题2{{var}}</a><p class="small text-muted" align="right">2019/11/05{{date}}</p></td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-bell fa-fw"></i><a href="notice.notice_id">通知标题3{{var}}</a><p class="small text-muted" align="right">2019/11/05{{date}}</p></td>
+                            </tr>
+                            <tr>
+                                <td><i class="fas fa-bell fa-fw"></i><a href="karrol_base.html">通知标题4{{var}}</a><p class="small text-muted" align="right">2019/11/05{{date}}</p></td> 
+                            </tr> -->
+                        </table>
+                              
+                    </div>
+            </div>
+            <div class="card-footer small text-muted">数据更新于{{nowtime}}</div>
+          </div>
+        <div class="card mb-3">
+          <div class="card-header">
+            {{notice_lend.columnName}}</div>
+          <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="histnotice" width="100%" cellspacing="0">
+                            {% for notice in notice_lend %}
+                            <tr class="{% cycle notice.tittle notice.pubDate %}">
+                                 <td><i class="fas fa-bell fa-fw"></i><a href="/shownotice/detail?aticleID={{ notice.articleID }}">{{notice.articleID}} {{notice.tittle}}</a><p class="small text-muted" align="right">{{notice.pubDate}}</p></td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                              
+                    </div>
+            </div>
+          
+          <div class="card-footer small text-muted">数据更新于{{nowtime}}</div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- /.content-wrapper -->
+    {%endblock perscontent%}
+
+  </div>
+  
+  <!-- /#wrapper -->
+    

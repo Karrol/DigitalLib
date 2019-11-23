@@ -1,0 +1,82 @@
+{% extends "library/pers_base.html" %}
+{% load static %}
+
+    {%block perscontent%}
+    <!--个人中心网页的核心内容可替换组件-->
+
+    <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"></li>
+                <li class="breadcrumb-item active">我的资源</li>
+            </ol>
+            {% if state %}
+            <div class="col-md-2 col-md-offset-6">
+                <div class="alert alert-warning">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    {% if state == 'add_success' %}
+                        <h2> 添加成功！</h2>
+                    {% endif %}
+                    {% if state == 'repeat_add' %}
+                        <h2>您已添加过此书籍！</h2>
+                    {% endif %}
+                    {% if state == 'delete_from_mylib_success' %}
+                        <h2>您已成功删除！</h2>
+                    {% endif %}
+                    {% if state == 'delete_from_mylib_fail' %}
+                        <h2>删除失败！</h2>
+                    {% endif %}
+                </div>
+            </div>
+    {% endif %}
+        <!--我的书架封面展示页-->
+        <div class="col-lg-9">
+            <div class="row">
+              {%for book in mylib_list%}
+              <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                  <a href="/book/detail?ISBN={{ book.ISBN.ISBN }}"><img class="card-img-top" src="/media/{{book.ISBN.cover}}" alt="{{book.ISBN.title}}封面"></a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a href="/book/detail?ISBN={{ book.ISBN.ISBN }}">{{book.ISBN.title}}</a>
+                    </h4>
+                    <h5>{{book.ISBN.author }}</h5>
+                    <!--<p class="card-text">{{book.ISBN.description}}</p> -->
+                  </div>
+                  <div class="card-footer">
+                      <!--#评星的网页显示，之后要不要有这个字段，进行条件判断给星星；要不就提供评分的动态效果-->
+                    <!--<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small> -->
+                      <small class="text-muted"><a href="/mylib/delete?ISBN={{ book.ISBN.ISBN }}">删除书籍</a></small>
+                  </div>
+                </div>
+              </div>
+              {%endfor%}
+
+            </div>
+          <!--我的书架封面展示页结束-->
+            
+
+        </div>
+
+
+    </div>
+      <!-- /.container-fluid -->
+     
+      <!-- Sticky Footer -->
+      <!--<footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright © 五朵金花 2019</span>
+          </div>
+        </div>
+      </footer>-->
+
+    </div>
+    <!-- /.content-wrapper -->
+     {%endblock perscontent%}
+
+ 
+

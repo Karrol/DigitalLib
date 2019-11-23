@@ -1,0 +1,114 @@
+{% extends "library/pers_base.html" %}
+{% load static %}
+    {%block perscontent%}
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{%url 'notice'%}"></a>
+          </li>
+          <li class="breadcrumb-item active">消息通知</li>
+        </ol>
+
+        {% if state %}
+          {% if state == 'weekbook_notice' %}
+          <!--此处显示每周一书的推荐界面-->
+               <div class="card mb-3">
+                    <div class="card-header">
+                        <i></i>
+                        {{notice.columnName}}</div>
+                    <div class="card-body">
+                        <div class="col-md-5">
+                           <div class="img-rounded">
+                              <img src="/media/{{ wbook_info.cover }}" alt="{{ wbook_info.title }}">
+                            </div>
+                            <br><br><br>
+                        </div>
+
+                        <div class="col-md-6 col-md-offset-1">
+                            <h2 class="text-center"><a href="/book/detail?ISBN={{ wbook_info.ISBN }}">{{ wbook_info.title }}</a></h2>
+                        <br>
+                        <h4>ISBN：{{ wbook_info.ISBN }}</h4>
+                        <h4>作者：{{ wbook_info.author }}</h4>
+                        <h4>出版社:{{ wbook_info.press }}</h4>
+                        <h4>类别：{{ wbook_info.category }}</h4>
+                        <h4>价格：{{ wbook_info.price|floatformat:2 }}</h4>
+                        <h4>位置:{{ wbook_info.location }}</h4>
+                        <h4>在馆数量：{{ wbook_info.quantity }}</h4>
+                        <hr>
+                        <p>推荐语:</p>
+                        <P>{{ notice.content }}</p>
+                        <hr>
+                    </div>
+
+
+                    </div>
+                    <div class="card-footer small text-muted">通知时间{{notice.pubDate}}</div>
+                </div>
+
+          {% elif state == 'normal_notice' %}
+          <!--此处显示催还通知等其他通知的详情页面-->
+           <!-- DataTables Example -->
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i></i>
+                        {{notice.columnName}}</div>
+                    <div class="card-body">
+                        <!-- Post Content Column -->
+                      <div class="col-lg-8">
+
+                        <!-- Title -->
+                        <h1 class="mt-4">{{notice.tittle}}</h1>
+
+                        <!-- Author -->
+                        <p class="lead">
+                          文/
+                          <a href="#">{{notice.author}}</a>
+                        </p>
+
+                        <hr>
+
+                        <!-- Date/Time -->
+                        <p>{{notice.pubDate}}</p>
+
+                        <hr>
+
+                        <!-- Preview Image -->
+                        <img class="img-fluid rounded" src="/media/home_backgroud.jpg" alt="">
+
+                        <hr>
+
+                        <!-- Post Content -->
+                        <p class="lead">别的不多都说了，请尽将图书快归还~</p>
+
+                        <blockquote class="blockquote">
+                          <p class="mb-0">{{notice.content}}</p>
+                          <footer class="blockquote-footer">图书馆某员工
+                            <cite title="Source Title">口头禅</cite>
+                          </footer>
+                        </blockquote>
+                        <hr>
+                      </div>
+
+                    </div>
+                    <div class="card-footer small text-muted">通知时间{{notice.pubDate}}</div>
+                </div>
+                    
+          {% endif %}
+    {% endif %}
+
+
+
+      </div>
+
+    </div>
+    <!-- /.content-wrapper -->
+    {%endblock perscontent%}
+
+  </div>
+
+  <!-- /#wrapper -->
+    

@@ -1,0 +1,82 @@
+{% extends 'library/base.html' %}
+
+{% block title %} 欢迎来到图书馆！ {% endblock %}
+
+
+{% block content %}
+     <div class="container col-md-8 col-md-offset-2">
+        <br>
+        <h1 align="center">检索历史</h1>
+        <table class="table table-hover">
+            <thead>
+
+            <th><input type="checkbox" class="i-checks" id="allChecks" onclick="ckAll()" />全选/全不选</th>
+            <th>添加时间</th>
+            <th>序号</th>
+
+            <th>封面</th>
+            <th>标题</th>
+            <th>作者</th>
+            <th>分类</th>
+            <th>在馆位置</th>
+            <th>在馆数量</th>
+            <th><input type="button" onclick="MultiDel()" class="btn" value="移除"></th>
+
+            </thead>
+        
+            <tbody>
+            {% for book in searchlists %}
+                <tr>
+                     <td><input type="checkbox" class="i-checks" name="input[]" value="{{book.id}}"></td>
+                    <td>{{book.search_date}}</td>
+                    <td>{{ forloop.counter }}</td>
+                    <td>
+                        <a href="/book/detail?ISBN={{ book.ISBN.ISBN }}">
+                            <img class="img-responsive"
+                                 src="/media/{{ book.ISBN.cover }}"
+                                 width="90"
+                                 height="128"
+                                 alt="{{ book.ISBN.title }}">
+                        </a>
+                    </td>
+                    <td><a href="/book/detail?ISBN={{ book.ISBN.ISBN }}">{{ book.ISBN.title }}</a></td>
+                    <td>{{ book.ISBN.author }}
+                    <td>{{ book.ISBN.category }}</td>
+                    <td>{{ book.ISBN.location }}</td>
+                    <td>{{ book.ISBN.quantity }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="/book/detail?ISBN={{ book.ISBN.ISBN }}">详情</a>
+                    </td>
+
+                </tr>
+            {% empty %}
+                <tr>
+                    <td>暂无图书</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+       <!--查询历史的翻页功能有待开发！-->
+        <nav class="myContainer">
+            <ul class="pager">
+                {% if searchlists.has_previous %}
+                    <li class="previous"><a
+                            href="{{ current_path }}&page={{ searchlists.previous_page_number }}#hint">上一页</a>
+                    </li>
+                {% else %}
+                    <li class="previous disabled"><a href="#">上一页</a></li>
+                {% endif %}
+                第 {{ searchlists.number }} / {{ searchlists.paginator.num_pages }}页
+                {% if searchlists.has_next %}
+                    <li class="next"><a
+                            href="{{ current_path }}&page={{ searchlists.next_page_number }}#hint">下一页</a>
+                    </li>
+                {% else %}
+                    <li class="next disabled"><a href="#">下一页</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+
+{% endblock %}

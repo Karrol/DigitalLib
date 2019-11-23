@@ -1,0 +1,61 @@
+{% extends "library/pers_base.html" %}
+{% load staticfiles %}
+{% block title %}修改个人信息{% endblock %}
+
+{%block perscontent%}
+
+ <div id="content-wrapper">
+
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
+
+                {% if state %}
+                    <div class="alert alert-success text-center">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        {% if state == 'none' %}
+                            <h2>修改信息失败</h2>
+                        {% elif state == 'success' %}
+                            <h2><a href="{%url 'profile'%}">修改成功,点击返回个人信息页面</a></h2>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                <div class="card mb-3">
+                    <div class="card-header">
+                    <i></i>
+                    修改个人信息</div>
+                    <div class="card-body">
+                        <form method="POST" role="form" class="form-horizontal">
+                            {% csrf_token %}
+                            <!--<h1 class="form-signin-heading text-center">修改个人信息</h1> -->
+
+                            {% for field in Change_reader_infoForm %}
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">{{ field.label }}</label>
+                                    <div class="col-md-9">
+                                        {{ field }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                            <div class="form-group">
+                                <div class="col-md-4 col-md-offset-4">
+                                    <button class="btn btn btn-primary btn-block" type="submit">提交</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+              </div>
+
+            </div>
+
+        </div>
+    </div>
+   </div>
+
+
+
+{% endblock perscontent %}

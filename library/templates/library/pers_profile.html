@@ -1,0 +1,90 @@
+{% extends "library/pers_base.html" %}
+{% load static %}
+{% load staticfiles %}
+    {%block perscontent%}
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+    
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#"></a>
+          </li>
+          <li class="breadcrumb-item active">个人基本信息</li>
+        </ol>
+
+        <!-- DataTables Example -->
+        <div class="card mb-3" id="个人资料">
+            <div class="card-header">
+                <i></i>
+                基本信息</div>
+
+
+            <div class="card-body">
+                <div class="circular--portrait">
+              <img src="/media/{{reader.photo}}" class="rounded-circle float-left media-object .img-rounded" style="right: 0;" >
+            </div><br>
+                    <div class="table-responsive">
+                        <table class="table table-bordered"  width="100%" cellspacing="0">
+                           <!--<span>读者ID：{{var}}</span><br>  -->
+                            <span>姓名：{{reader.name}}</span><br>
+                            <span>联系电话：{{reader.phone}}</span><br>
+                            <span>邮箱：{{reader.email}}</span><br>
+                            <span></span><br>
+
+                        </table>
+
+                    </div>
+
+            </div>
+
+            
+          </div>
+          <div class="card mb-3" id="实名信息">
+              <div class="card-header">
+                  <i></i>
+                  实名信息</div>
+              <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table table-bordered"  width="100%" cellspacing="0">
+                              <span>证件类型：{{reader.idType}}</span><br>
+                              <span>证件号码：{{reader.idNumber}}</span><br>
+                              <span>读者类型：{{reader.readertypeName}}</span><br>
+                              
+                          </table>
+                                
+                      </div>
+              </div>             
+            </div>
+
+
+        <div class="card mb-3">
+          <div class="card-header">
+            <i></i>
+            设置</div>
+          <div class="card-body">
+
+
+
+              <div class="input-group-append">
+                  <button class="btn" type="button">
+                    <i class="fas text-muted"></i><a href="{%url 'changeinfo'%}">修改个人信息</a>
+                  </button>
+                  <button class="btn" type="button">
+                    <i class="fas text-muted"></i><a href="{%url 'set_password' %}">修改密码</a>
+                  </button>
+              </div>
+              
+          </div>
+          
+        </div>
+
+
+      </div>
+      
+      <!-- /.container-fluid -->
+
+      
+    <!-- /.content-wrapper -->
+    {%endblock perscontent%}
